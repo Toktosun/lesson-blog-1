@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список объявлений</title>
+</head>
+<body>
+{#    <h2>{{ publication_list }}</h2>#}
+    {% for item in publication_list %}
+        <h2 style="color: red">{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <h4>{{ item.price }}</h4>
+    {% endfor %}
+</body>
+</html>
