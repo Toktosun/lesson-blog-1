@@ -25,3 +25,5 @@ urlpatterns = [
     path('board/', show_board),
     path('articles/', show_all_articles)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

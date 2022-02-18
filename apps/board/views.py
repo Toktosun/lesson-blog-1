@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from apps.board.models import PublicationAd
+from apps.social.models import Article
 
 
 def show_board(request):
@@ -17,5 +18,7 @@ def show_board(request):
 
 def show_all_articles(request):
     """Показ всех артиклей"""
-    response = render(request, 'index.html')
+    article_qs = Article.objects.all()
+    response = render(request, 'index.html',
+                      context={'article_list': article_qs})
     return response
