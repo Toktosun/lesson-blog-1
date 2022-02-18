@@ -13,3 +13,9 @@ def show_board(request):
         context={'publication_list': publications}
     )
     return response
+
+
+def show_all_articles(request):
+    """Показ всех артиклей"""
+    response = render(request, 'index.html')
+    return response
