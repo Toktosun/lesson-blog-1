@@ -29,7 +29,7 @@ class ArticleListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = dict()
         query_parameters = self.request.GET  # dictionary
-        search_word = str(query_parameters.get('search_word', None))
+        search_word = query_parameters.get('search_word', None)
         if search_word:
             context['article_list'] = Article.objects.filter(
                 Q(title__icontains=search_word) |
