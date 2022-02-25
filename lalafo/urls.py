@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 
-from apps.board.views import show_board, show_all_articles
+from apps.board.views import ArticleListView, BoardView, ArticleSingleView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('board/', show_board),
-    path('articles/', show_all_articles)
+    path('board/', BoardView.as_view()),
+    path('articles/', ArticleListView.as_view(), name='articles-url'),
+    path('articles/<int:pk>/', ArticleSingleView.as_view(), name='articles-single-url')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
