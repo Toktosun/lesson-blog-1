@@ -1,9 +1,11 @@
+from django.db.models import Q
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from apps.board.models import PublicationAd
-from apps.social.models import Article
+from apps.social.models import Article, ArticleCategory
+
 
 # View бывают двух видов:
 # 1. Function based view
@@ -26,7 +28,16 @@ class ArticleListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = dict()
-        context['article_list'] = Article.objects.all()
+        query_parameters = self.request.GET  # dictionary
+        search_word = str(query_parameters.get('search_word', None))
+        if search_word:
+            context['article_list'] = Article.objects.filter(
+                Q(title__icontains=search_word) |
+                Q(description__icontains=search_word) |
+                Q(category__title__icontains=search_word)
+            )
+        else:
+            context['article_list'] = Article.objects.all()
         return context
 
 
